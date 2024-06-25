@@ -5,10 +5,7 @@ FROM python:3.9
 WORKDIR /app
 
 # Copy the requirements file
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install chproxy
 
 # Install JupyterHub
 RUN pip install jupyterhub
