@@ -12,4 +12,4 @@ RUN curl -fsSL code-server.dev/install.sh | bash
 
 RUN export PASSWORD=12345
 
-ENTRYPOINT ["code-server", "--host", "0.0.0.0", "--port", "443"]
+ENTRYPOINT ["code-server", "--host", "0.0.0.0", "--port", "443", "--auth", "password"]
