@@ -8,4 +8,4 @@ WORKDIR /app
 COPY . .
 
 # Expose the JupyterHub port
-ENTRYPOINT ["python", "m.py"]
+ENTRYPOINT ["bash", "run.sh"]
