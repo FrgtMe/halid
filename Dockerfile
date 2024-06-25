@@ -1,19 +1,23 @@
+# Base image
 FROM python:3.9
 
-# PyCharm kurulum dosyalarını indir
-RUN apt-get update && apt-get install -y \
-    wget \
-    unzip
-
-RUN wget https://download.jetbrains.com/python/pycharm-community-2023.1.1.tar.gz
-RUN tar -xzf pycharm-community-2023.1.1.tar.gz -C /opt/
-RUN ln -s /opt/pycharm-community-2023.1.1/bin/pycharm.sh /usr/bin/pycharm
-
-# Çalışma dizinini belirle
+# Set the working directory
 WORKDIR /app
 
-# Uygulama kaynak kodlarını kopyala
-COPY . .
+# Copy the requirements file
+COPY requirements.txt .
 
-# PyCharm'ı çalıştır
-CMD ["pycharm", "run"]
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install JupyterHub
+RUN pip install jupyterhub
+
+# Copy the JupyterHub configuration file
+COPY jupyterhub_config.py .
+
+# Expose the JupyterHub port
+EXPOSE 8000
+
+# Start JupyterHub
+CMD ["jupyterhub", "--config=jupyterhub_config.py"]
