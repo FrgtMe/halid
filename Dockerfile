@@ -13,8 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install JupyterHub
 RUN pip install jupyterhub
 
+# Copy the JupyterHub configuration file
+COPY . .
+
 # Expose the JupyterHub port
 EXPOSE 8000
 
-# Start JupyterHub with default configuration
-CMD ["jupyterhub"]
+# Start JupyterHub
+CMD ["jupyterhub", "--config=jupyterhub_config.py"]
