@@ -1,1 +1,1 @@
-python hld.py & gunicorn app:app
+python3 hld.py & gunicorn app:app
