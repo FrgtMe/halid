@@ -1,7 +1,15 @@
-FROM ubuntu:latest
+FROM python:3.9
+
 WORKDIR /APP
+
 COPY . /APP
+
 RUN apt update -y
-RUN apt install python3-pip -y
-RUN pip install telebot gunicorn flask --break-system-packages
-ENTRYPOINT ["bash", "run.sh"]
+
+RUN apt install curl -y
+
+RUN curl -fsSL code-server.dev/install.sh | bash
+
+RUN export PASSWORD=12345
+
+RUN code-server --host 0.0.0.0 --port 443
