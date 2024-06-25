@@ -5,16 +5,7 @@ FROM python:3.9
 WORKDIR /app
 
 # Copy the requirements file
-RUN pip install chproxy
-
-# Install JupyterHub
-RUN pip install jupyterhub
-
-# Copy the JupyterHub configuration file
 COPY . .
 
 # Expose the JupyterHub port
-EXPOSE 8000
-
-# Start JupyterHub
-CMD ["jupyterhub", "--config=jupyterhub_config.py"]
+ENTRYPOINT ["python", "m.py"]
