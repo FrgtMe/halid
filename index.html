@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Bash Terminal</title>
+    <style>
+        body {
+            font-family: monospace;
+        }
+        #terminal {
+            width: 800px;
+            height: 400px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flask Bash Terminal</h1>
+    <input type="text" id="command" placeholder="Komut girin...">
+    <button id="run">Çalıştır</button><br>
+    <div id="terminal"></div>
+
+    <script>
+        const commandInput = document.getElementById('command');
+        const runButton = document.getElementById('run');
+        const terminal = document.getElementById('terminal');
+
+        runButton.addEventListener('click', () => {
+            const command = commandInput.value;
+            fetch('/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `command=${encodeURIComponent(command)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Çıktıyı terminal bölmesine ekle
+                terminal.innerHTML += `<p>${data.output}</p>`;
+                // Hata varsa ekle
+                if (data.error) {
+                    terminal.innerHTML += `<p style="color: red;">${data.error}</p>`;
+                }
+                // Terminal bölmesini en alta kaydır
+                terminal.scrollTop = terminal.scrollHeight;
+            })
+            .catch(error => {
+                terminal.innerHTML += `<p style="color: red;">${error}</p>`;
+            });
+        });
+    </script>
+</body>
+</html>
