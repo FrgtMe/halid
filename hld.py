@@ -435,7 +435,7 @@ def freee(message):
   if user_id not in SUDO_USERS:
     return bot.reply_to(message, "Bu komutu kullanmaya yetkiniz yok.")    
   while True:
-  time.sleep(180)
+    time.sleep(180)
     try:
       with open('balances.json', "r") as file:
         balances = json.load(file)
