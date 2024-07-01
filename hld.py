@@ -7,7 +7,7 @@ from telebot import TeleBot, types
 from collections import defaultdict
 from threading import Thread
 
-API_TOKEN = '7039187206:AAG4SOoyiJXMp4-49qwOPBLxgCW3s8m6A0I'
+API_TOKEN = input("Token gir: ")
 
 bot = telebot.TeleBot(API_TOKEN)
 
